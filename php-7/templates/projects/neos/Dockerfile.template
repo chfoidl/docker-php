@@ -1,0 +1,11 @@
+#
+# Install NEOS dependencies
+#
+RUN apk add --no-cache \
+		libpq \
+	&& apk add --no-cache --virtual .neos-deps \
+		postgresql-dev \
+		openldap-dev \
+	&& docker-php-ext-install pdo_pgsql \
+	&& docker-php-ext-install ldap \
+	&& apk del .neos-deps

@@ -1,0 +1,4 @@
+#
+# Install TYPO3 dependencies
+#
+RUN docker-php-ext-install pdo_mysql
