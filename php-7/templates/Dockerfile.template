@@ -8,12 +8,12 @@ WORKDIR /app
 ARG TYPE=cli
 ARG DEBUG
 ENV COMPOSER_HOME=/var/composer
-ENV COMPOSER_MEMORY_LIMIT=1G
+ENV COMPOSER_MEMORY_LIMIT=4G
 
 #
 # Locale support
 #
-# ENV MUSL_LOCPATH="/usr/share/i18n/locales/musl"
+ENV MUSL_LOCPATH="/usr/share/i18n/locales/musl"
 
 RUN apk update && apk add --no-cache \
         libintl \
