@@ -1,0 +1,12 @@
+#
+# Install Sylius dependencies
+#
+RUN apk add --no-cache \
+		imagemagick \
+	&& apk add --no-cache --virtual .sylius-deps \
+		$PHPIZE_DEPS \
+		imagemagick-dev \
+	&& docker-php-ext-install exif \
+	&& docker-php-ext-install pdo_mysql \
+	&& docker-php-ext-enable imagemagick \
+	&& apk del .sylius-deps
