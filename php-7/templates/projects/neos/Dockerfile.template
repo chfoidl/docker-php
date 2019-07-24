@@ -3,9 +3,13 @@
 #
 RUN apk add --no-cache \
 		libpq \
+		imagemagick \
 	&& apk add --no-cache --virtual .neos-deps \
+		$PHPIZE_DEPS \
+		imagemagick-dev \
 		postgresql-dev \
 		openldap-dev \
 	&& docker-php-ext-install pdo_pgsql \
 	&& docker-php-ext-install ldap \
+	&& docker-php-ext-enable imagemagick \
 	&& apk del .neos-deps

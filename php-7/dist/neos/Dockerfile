@@ -14,12 +14,12 @@ WORKDIR /app
 ARG TYPE=cli
 ARG DEBUG
 ENV COMPOSER_HOME=/var/composer
-ENV COMPOSER_MEMORY_LIMIT=1G
+ENV COMPOSER_MEMORY_LIMIT=4G
 
 #
 # Locale support
 #
-# ENV MUSL_LOCPATH="/usr/share/i18n/locales/musl"
+ENV MUSL_LOCPATH="/usr/share/i18n/locales/musl"
 
 RUN apk update && apk add --no-cache \
         libintl \
@@ -72,11 +72,15 @@ RUN apk update && apk add --no-cache \
 #
 RUN apk add --no-cache \
 		libpq \
+		imagemagick \
 	&& apk add --no-cache --virtual .neos-deps \
+		$PHPIZE_DEPS \
+		imagemagick-dev \
 		postgresql-dev \
 		openldap-dev \
 	&& docker-php-ext-install pdo_pgsql \
 	&& docker-php-ext-install ldap \
+	&& docker-php-ext-enable imagemagick \
 	&& apk del .neos-deps
 
 #
