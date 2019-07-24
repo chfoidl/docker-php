@@ -14,12 +14,12 @@ WORKDIR /app
 ARG TYPE=cli
 ARG DEBUG
 ENV COMPOSER_HOME=/var/composer
-ENV COMPOSER_MEMORY_LIMIT=1G
+ENV COMPOSER_MEMORY_LIMIT=4G
 
 #
 # Locale support
 #
-# ENV MUSL_LOCPATH="/usr/share/i18n/locales/musl"
+ENV MUSL_LOCPATH="/usr/share/i18n/locales/musl"
 
 RUN apk update && apk add --no-cache \
         libintl \
@@ -70,7 +70,14 @@ RUN apk update && apk add --no-cache \
 #
 # Install TYPO3 dependencies
 #
-RUN docker-php-ext-install pdo_mysql
+RUN apk add --no-cache \
+		imagemagick \
+	&& apk add --no-cache --virtual .typo3-deps \
+		$PHPIZE_DEPS \
+		imagemagick-dev \
+	&& docker-php-ext-install pdo_mysql \
+	&& docker-php-ext-enable imagemagick \
+	&& apk del .typo3-deps
 
 #
 # CLI
