@@ -77,7 +77,8 @@ RUN apk add --no-cache \
 		imagemagick-dev \
 	&& docker-php-ext-install exif \
 	&& docker-php-ext-install pdo_mysql \
-	&& docker-php-ext-enable imagemagick \
+	&& pecl install imagick \
+	&& docker-php-ext-enable imagick \
 	&& apk del .sylius-deps
 
 #

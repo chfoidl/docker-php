@@ -80,7 +80,8 @@ RUN apk add --no-cache \
 		openldap-dev \
 	&& docker-php-ext-install pdo_pgsql \
 	&& docker-php-ext-install ldap \
-	&& docker-php-ext-enable imagemagick \
+	&& pecl install imagick \
+	&& docker-php-ext-enable imagick \
 	&& apk del .neos-deps
 
 #
