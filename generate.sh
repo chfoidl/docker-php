@@ -11,10 +11,10 @@ generate_header () {
 	EOH
 }
 
-generate_php_7 () {
-	TEMPLATE_DIR="php-7/templates"
+generate () {
+	TEMPLATE_DIR="$1/templates"
 	PROJECT_TEMPLATE_DIR="$TEMPLATE_DIR/projects"
-	OUTPUT_DIR="php-7/dist"
+	OUTPUT_DIR="$1/dist"
 
 	for p in $(find $PROJECT_TEMPLATE_DIR/* -type d)
 	do
@@ -33,4 +33,5 @@ generate_php_7 () {
 	done
 }
 
-generate_php_7
+generate "php-5"
+generate "php-7"
