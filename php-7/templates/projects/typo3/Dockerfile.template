@@ -6,6 +6,7 @@ RUN apk add --no-cache \
 	&& apk add --no-cache --virtual .typo3-deps \
 		$PHPIZE_DEPS \
 		imagemagick-dev \
+	&& docker-php-ext-install mysqli \
 	&& docker-php-ext-install pdo_mysql \
 	&& pecl install imagick \
 	&& docker-php-ext-enable imagick \
