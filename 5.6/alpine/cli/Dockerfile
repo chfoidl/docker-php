@@ -158,4 +158,11 @@ RUN chmod +x /usr/local/bin/docker-*
 
 ENTRYPOINT ["docker-php-entrypoint"]
 
+RUN set -ex \
+	&& cd /etc/ssl \
+	&& if [ -f openssl.cnf ]; then \
+		# Enable openssl defaults in libressl configuration
+		sed -i '2,3s/^#//' openssl.cnf; \
+	fi
+
 CMD ["php", "-a"]

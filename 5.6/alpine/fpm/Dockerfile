@@ -161,6 +161,11 @@ ENTRYPOINT ["docker-php-entrypoint"]
 WORKDIR /var/www/html
 
 RUN set -ex \
+	&& cd /etc/ssl \
+	&& if [ -f openssl.cnf ]; then \
+		# Enable openssl defaults in libressl configuration
+		sed -i '2,3s/^#//' openssl.cnf; \
+	fi \
 	&& cd /usr/local/etc \
 	&& if [ -d php-fpm.d ]; then \
 		# for some reason, upstream's php-fpm.conf.default has "include=NONE/etc/php-fpm.d/*.conf"
