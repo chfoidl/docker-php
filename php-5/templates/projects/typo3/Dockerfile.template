@@ -7,6 +7,7 @@ RUN apk add --no-cache \
 		$PHPIZE_DEPS \
 		imagemagick-dev \
 		libxml2-dev \
+	&& docker-php-ext-install mysql \
 	&& docker-php-ext-install mysqli \
 	&& docker-php-ext-install soap \
 	&& pecl install imagick \
