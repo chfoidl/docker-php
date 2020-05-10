@@ -1,0 +1,18 @@
+#!/bin/bash
+
+VERSION=$(echo "$DOCKER_TAG" | cut -d'-' -f1)
+TYPE=$(echo "$DOCKER_TAG" | cut -d'-' -f2)
+DEBUG="no"
+
+if [[ $DOCKER_TAG =~ "debug" ]]
+then
+	DEBUG="yes"
+fi
+
+docker build \
+	--build-arg VERSION="$VERSION" \
+	--build-arg TYPE="$TYPE" \
+	--build-arg DEBUG="$DEBUG" \
+	-f $DOCKERFILE_PATH \
+	-t $IMAGE_NAME \
+	.
