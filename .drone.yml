@@ -1,0 +1,49 @@
+kind: pipeline
+name: default
+
+steps:
+  - name: build-typo3-5.6.40
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: DOCKER_USERNAME
+      password:
+        from_secret: DOCKER_PASSWORD
+      repo: chfoidl/php
+      build_args:
+        - VERSION=5.6.40
+        - TYPE=fpm
+        - BASE_IMG_SUFFIX=-fpm
+        - PROJECT=typo3
+      tags:
+        - 5.6.40-fpm-alpine-typo3
+  - name: build-typo3-7.2
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: DOCKER_USERNAME
+      password:
+        from_secret: DOCKER_PASSWORD
+      repo: chfoidl/php
+      build_args:
+        - VERSION=7.2
+        - TYPE=fpm
+        - BASE_IMG_SUFFIX=-fpm
+        - PROJECT=typo3
+      tags:
+        - 7.2-fpm-alpine-typo3
+  - name: build-typo3-7.4
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: DOCKER_USERNAME
+      password:
+        from_secret: DOCKER_PASSWORD
+      repo: chfoidl/php
+      build_args:
+        - VERSION=7.4
+        - TYPE=fpm
+        - BASE_IMG_SUFFIX=-fpm
+        - PROJECT=typo3
+      tags:
+        - 7.2-fpm-alpine-typo3
